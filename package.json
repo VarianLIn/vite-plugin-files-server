@@ -1,0 +1,42 @@
+{
+    "name": "vite-plugin-files-server",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "dev": "tsup --watch",
+        "build": "tsup",
+        "test:playground": "cd playground && npm run dev"
+    },
+    "packageManager": "npm@10.9.2",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/VarianLIn/vite-plugin-files-server.git"
+    },
+    "keywords": [
+        "vitejs",
+        "plugin"
+    ],
+    "author": "varianlin",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/VarianLIn/vite-plugin-files-server/issues"
+    },
+    "homepage": "https://github.com/VarianLIn/vite-plugin-files-server#readme",
+    "devDependencies": {
+        "@types/node": "^24.10.2",
+        "tsup": "^8.5.1",
+        "typescript": "^5.9.3",
+        "vite": "^7.2.7"
+    }
+}
