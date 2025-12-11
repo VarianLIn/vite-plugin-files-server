@@ -2,20 +2,22 @@
  * @Author: Varian LIn
  * @Date: 2025-12-09 23:03:20
  * @LastEditors: Varian LIn
- * @LastEditTime: 2025-12-10 20:42:02
+ * @LastEditTime: 2025-12-11 13:51:11
  * @Description:
  */
 
 import type { Plugin, ViteDevServer } from 'vite';
 import fs from 'fs';
 import path from 'path';
+import templateString from './temp.html?raw';
+
+// console.log(templateString);
 
 // // 定义插件的配置项接口
 // interface FileServerOptions {
 //     enable?: boolean; // 是否启用
 //     root?: string; // 根目录，默认为项目根目录
 // }
-
 // export default function fileServerPlugin(options: FileServerOptions = {}): Plugin {
 //     const { enable = true } = options;
 
@@ -142,29 +144,35 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                             })
                             .join('');
 
-                        const html = `
-              <!DOCTYPE html>
-              <html>
-              <head>
-              <meta charset="UTF-8">
-								<title>Index of ${url}</title>
-								<style>
-										body { font-family: system-ui; padding: 2rem; max-width: 800px; margin: 0 auto; }
-										h2 { border-bottom: 1px solid #eee; padding-bottom: 10px; }
-										table { width: 100%; border-collapse: collapse; }
-										td { padding: 8px; border-bottom: 1px solid #f5f5f5; }
-										a { text-decoration: none; color: #646cff; }
-										a:hover { text-decoration: underline; }
-										ul,li { list-style: none; margin: 0; padding: 0; }
-                </style>
-              </head>
-              <body>
-                <h2>📂 Index of ${url}</h2>
-                ${url !== '/' ? `<p><a href="..">⬅️ Back to parent</a></p>` : ''}
-                <ul>${listItems}</ul>
-              </body>
-              </html>
-            `;
+                        //             const html = `
+                        //   <!DOCTYPE html>
+                        //   <html>
+                        //   <head>
+                        //   <meta charset="UTF-8">
+                        // 		<title>Index of ${url}</title>
+                        // 		<style>
+                        // 				body { font-family: system-ui; padding: 2rem; max-width: 800px; margin: 0 auto; }
+                        // 				h2 { border-bottom: 1px solid #eee; padding-bottom: 10px; }
+                        // 				table { width: 100%; border-collapse: collapse; }
+                        // 				td { padding: 8px; border-bottom: 1px solid #f5f5f5; }
+                        // 				a { text-decoration: none; color: #646cff; }
+                        // 				a:hover { text-decoration: underline; }
+                        // 				ul,li { list-style: none; margin: 0; padding: 0; }
+                        //     </style>
+                        //   </head>
+                        //   <body>
+                        //     <h2>📂 Index of ${url}</h2>
+                        //     ${url !== '/' ? `<p><a href="..">⬅️ Back to parent</a></p>` : ''}
+                        //     <ul>${listItems}</ul>
+                        //   </body>
+                        //   </html>
+                        // `;
+
+                        const html = templateString
+                            .replace(/{{title}}/g, `Index of ${url}`)
+                            .replace(/{{url}}/g, url)
+                            // .replace('{{backLink}}', backLink)
+                            .replace(/{{listItems}}/g, listItems);
 
                         res.setHeader('Content-Type', 'text/html');
                         res.end(html);
