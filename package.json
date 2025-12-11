@@ -1,5 +1,5 @@
 {
-    "name": "vite-plugin-files-server",
+    "name": "@varianlin/vite-plugin-files-server",
     "version": "1.0.1",
     "description": "",
     "type": "module",
