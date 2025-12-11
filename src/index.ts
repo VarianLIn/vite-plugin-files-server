@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2025-12-09 23:03:20
  * @LastEditors: Varian LIn
- * @LastEditTime: 2025-12-11 13:51:11
+ * @LastEditTime: 2025-12-11 23:11:36
  * @Description:
  */
 
@@ -10,8 +10,6 @@ import type { Plugin, ViteDevServer } from 'vite';
 import fs from 'fs';
 import path from 'path';
 import templateString from './temp.html?raw';
-
-// console.log(templateString);
 
 // // 定义插件的配置项接口
 // interface FileServerOptions {
@@ -127,24 +125,41 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                             return next();
                         }
 
+                        // 面包屑
+                        let urlSplitArray = url.split('/');
+                        if (urlSplitArray[urlSplitArray.length - 1] == '') urlSplitArray = urlSplitArray.slice(0, -1);
+                        let headItem: string = '<a href="/">🏠︎</a> / ';
+                        urlSplitArray.forEach((p) => {
+                            p && (headItem += `<a href="/${p}">${p}</a> / `);
+                        });
+
                         // 生成文件列表 HTML
                         const files = fs.readdirSync(fullPath);
                         const listItems = files
                             .map((file) => {
                                 const filePath = path.join(fullPath, file);
                                 const isDir = fs.statSync(filePath).isDirectory();
-                                const icon = isDir ? '📁' : '📄';
+                                // const icon = isDir ? '📁' : '📄';
                                 const href = path.join(url, file).replace(/\\/g, '/');
-
-                                return `
-                <li style="padding: 5px 0;">
-                  <span style="margin-right: 10px;">${icon}</span>
-                  <a href="${href}" style="text-decoration: none; color: #646cff;">${file}</a>
+                                const item = `
+                <li>
+									<a href="${href}" class="icon ${isDir ? 'icon-directory' : 'icon-html icon-text-html'}"> 
+										<span class="name">${file}</span> 
+									</a>
                 </li>`;
+                                return item;
                             })
                             .join('');
+                        // 退回功能
+                        urlSplitArray = urlSplitArray.slice(0, -1);
+                        let backUrl = urlSplitArray.join('/');
+                        const backItem = `
+								<li>
+									<a href="${backUrl}" class="icon icon-directory"><span class="name">..</span></a>
+                </li>`;
+                        let fullList = urlSplitArray.length > 1 ? backItem + listItems : listItems;
 
-                        //             const html = `
+                        // const html = `
                         //   <!DOCTYPE html>
                         //   <html>
                         //   <head>
@@ -170,9 +185,9 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
 
                         const html = templateString
                             .replace(/{{title}}/g, `Index of ${url}`)
+                            .replace(/{{headItem}}/g, headItem)
                             .replace(/{{url}}/g, url)
-                            // .replace('{{backLink}}', backLink)
-                            .replace(/{{listItems}}/g, listItems);
+                            .replace(/{{listItems}}/g, fullList);
 
                         res.setHeader('Content-Type', 'text/html');
                         res.end(html);
