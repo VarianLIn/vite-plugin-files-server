@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2025-12-09 23:03:20
  * @LastEditors: Varian LIn
- * @LastEditTime: 2025-12-11 23:11:36
+ * @LastEditTime: 2025-12-16 21:21:30
  * @Description:
  */
 
@@ -192,6 +192,11 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                         res.setHeader('Content-Type', 'text/html');
                         res.end(html);
                         return; // 拦截结束
+                    } else if (!fs.existsSync(fullPath)) {
+                        const html = 'path not found';
+                        res.setHeader('Content-Type', 'text/html');
+                        res.end(html);
+                        return;
                     }
                 } catch (e) {
                     console.error('File Server Plugin Error:', e);
