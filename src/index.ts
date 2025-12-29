@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2025-12-09 23:03:20
  * @LastEditors: Varian LIn
- * @LastEditTime: 2025-12-16 21:21:30
+ * @LastEditTime: 2025-12-29 21:52:28
  * @Description:
  */
 
@@ -113,6 +113,11 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
             server.middlewares.use((req, res, next) => {
                 const url = req.url ? decodeURIComponent(req.url.split('?')[0]) : '/';
 
+                // 🌟 关键修复：如果是 Vite 内部请求或 HMR 请求，直接放行
+                if (url.startsWith('/@') || url.includes('vite')) {
+                    return next();
+                }
+
                 // 获取物理路径
                 const projectRoot = server.config.root;
                 const fullPath = path.join(projectRoot, url);
@@ -142,11 +147,11 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                                 // const icon = isDir ? '📁' : '📄';
                                 const href = path.join(url, file).replace(/\\/g, '/');
                                 const item = `
-                <li>
-									<a href="${href}" class="icon ${isDir ? 'icon-directory' : 'icon-html icon-text-html'}"> 
-										<span class="name">${file}</span> 
-									</a>
-                </li>`;
+                                    <li>
+                                        <a href="${href}" class="icon ${isDir ? 'icon-directory' : 'icon-html icon-text-html'}"> 
+                                            <span class="name">${file}</span> 
+                                        </a>
+                                    </li>`;
                                 return item;
                             })
                             .join('');
@@ -154,9 +159,9 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                         urlSplitArray = urlSplitArray.slice(0, -1);
                         let backUrl = urlSplitArray.join('/');
                         const backItem = `
-								<li>
-									<a href="${backUrl}" class="icon icon-directory"><span class="name">..</span></a>
-                </li>`;
+                            <li>
+                                <a href="${backUrl}" class="icon icon-directory"><span class="name">..</span></a>
+                            </li>`;
                         let fullList = urlSplitArray.length > 1 ? backItem + listItems : listItems;
 
                         // const html = `
