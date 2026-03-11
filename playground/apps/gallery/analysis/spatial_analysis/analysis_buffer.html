@@ -1,0 +1,102 @@
+<!--
+ * @Author: Varian LIn
+ * @Date: 2025-06-18 16:29:22
+ * @LastEditors: Varian LIn
+ * @LastEditTime: 2026-03-10 17:29:01
+ * @Description: 
+-->
+<!doctype html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="group:label" content="空间分析" />
+        <script src="/dist/syearth.min.js"></script>
+        <script src="/dist/thirdparty/lil-gui@0.21.js"></script>
+        <title>analysis buffer</title>
+    </head>
+    <body>
+        <style>
+            @import url(/apps/style/global.css);
+        </style>
+
+        <div id="earthContainer"></div>
+        <script type="module">
+            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
+            let earth = new SyEarth.Earth('earthContainer', options);
+
+            earth.scene.globe.depthTestAgainstTerrain = true;
+
+            //
+            function pointBuffer() {
+                let pointBuffered = new SyEarth.BufferAnalysisHandler({
+                    type: 'point',
+                    data: [108.93, 34.21, 500],
+                    distance: 10
+                });
+                let pointBufferEnt = earth.entities.add({
+                    polygon: {
+                        hierarchy: Cesium.Cartesian3.fromDegreesArray(pointBuffered.geometry.coordinates.flat(2)),
+                        material: Cesium.Color.GREEN.withAlpha(0.8),
+                        height: 500
+                    }
+                });
+                earth.zoomTo(pointBufferEnt);
+            }
+            function lineBuffer() {
+                let lineBuffered = new SyEarth.BufferAnalysisHandler({
+                    type: 'polyline',
+                    data: [
+                        [108.93, 34.21, 500],
+                        [108.93, 34.212, 500],
+                        [108.931, 34.2124, 500]
+                    ],
+                    distance: 10
+                });
+                let lineBufferEnt = earth.entities.add({
+                    polygon: {
+                        hierarchy: Cesium.Cartesian3.fromDegreesArray(lineBuffered.geometry.coordinates.flat(2)),
+                        material: Cesium.Color.GREEN.withAlpha(0.8),
+                        height: 500
+                    }
+                });
+                earth.zoomTo(lineBufferEnt);
+            }
+            function polygonBuffer() {
+                let polygonBuffered = SyEarth.BufferAnalysisHandler({
+                    type: 'polygon',
+                    data: [
+                        [108.93, 34.21, 500],
+                        [108.93, 34.212, 500],
+                        [108.931, 34.2124, 500],
+                        [108.932, 34.2121, 500],
+                        [108.93, 34.21, 500]
+                    ],
+                    distance: 10
+                });
+                let polygonBufferEnt = earth.entities.add({
+                    polygon: {
+                        hierarchy: Cesium.Cartesian3.fromDegreesArray(polygonBuffered.geometry.coordinates.flat(2)),
+                        material: Cesium.Color.GREEN.withAlpha(0.8),
+                        height: 500
+                    }
+                });
+                earth.zoomTo(polygonBufferEnt);
+            }
+
+            //
+            const gui = new lil.GUI({ autoPlace: true });
+            gui.domElement.id = 'GuiRight';
+            const panel = gui.addFolder('缓冲分析');
+            panel.open();
+            const operationObj = {
+                pointBuffer,
+                lineBuffer,
+                polygonBuffer
+            };
+            panel.add(operationObj, 'pointBuffer').name('点缓冲');
+            panel.add(operationObj, 'lineBuffer').name('线缓冲');
+            panel.add(operationObj, 'polygonBuffer').name('面缓冲');
+        </script>
+    </body>
+</html>

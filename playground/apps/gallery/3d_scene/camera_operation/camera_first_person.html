@@ -1,0 +1,69 @@
+<!--
+ * @Author: Varian LIn
+ * @Date: 2024-08-28 13:57:47
+ * @LastEditors: Varian LIn
+ * @LastEditTime: 2026-03-10 17:24:20
+-->
+<!doctype html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="group:label" content="第一人称视角" />
+        <script src="/dist/syearth.min.js"></script>
+        <script src="/dist/thirdparty/lil-gui@0.21.js"></script>
+        <title>camera first person</title>
+    </head>
+    <body>
+        <style>
+            @import url(/apps/style/global.css);
+            #infor {
+                position: fixed;
+                left: 20px;
+                top: 0;
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                padding: 0 20px;
+            }
+        </style>
+        <div id="earthContainer"></div>
+        <div id="infor">
+            <p>进入第一人称操作后</p>
+            <p>W/A/S/D控制前后左右</p>
+            <p>鼠标控制视角方向</p>
+        </div>
+        <script type="module">
+            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
+            let earth = new SyEarth.Earth('earthContainer', options);
+
+            const tileset = await Cesium.Cesium3DTileset.fromUrl(
+                'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json'
+            );
+            earth.scene.primitives.add(tileset);
+            earth.zoomTo(tileset);
+
+            let f = new SyEarth.Utils.firstPerson(earth);
+
+            // GUI
+            const gui = new lil.GUI({ autoPlace: true });
+            gui.domElement.id = 'GuiRight';
+            const panel = gui.addFolder('panel');
+            panel.open();
+            const operationObj = {
+                zoomTo: function () {
+                    earth.zoomTo(tileset);
+                },
+                firstPerson: function () {
+                    f.start();
+                },
+                cancel: function () {
+                    f.quit();
+                }
+            };
+
+            panel.add(operationObj, 'zoomTo').name('定位到位置');
+            panel.add(operationObj, 'firstPerson').name('进入第一人称操作');
+            panel.add(operationObj, 'cancel').name('取消第一人称操作');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+<!--
+ * @Author: Varian LIn
+ * @Date: 2024-08-28 13:57:47
+ * @LastEditors: Varian LIn
+ * @LastEditTime: 2026-03-11 17:11:55
+-->
+<!doctype html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="/dist/syearth.min.js"></script>
+        <title>load 3dtiles</title>
+    </head>
+    <body>
+        <style>
+            @import url(/apps/style/global.css);
+        </style>
+
+        <div id="earthContainer"></div>
+        <script type="module">
+            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
+
+            // let earth = new SyEarth.Earth('earthContainer', {});
+            // let scene = earth.scene;
+            // let layer = new SyEarth.S3MTilesLayer({
+            //     context: scene._context,
+            //     url: '/apps/sampledata/CBD/cbd.scp'
+            // });
+            // scene.primitives.add(layer);
+
+            // layer.readyPromise.then(function () {
+            //     scene.camera.setView({
+            //         destination: new Cesium.Cartesian3(-2181968.890329965, 4385313.17843029, 4072712.8241634783),
+            //         orientation: {
+            //             heading: 3.1756648661534443,
+            //             pitch: -0.3715184468182904
+            //         }
+            //     });
+            // });
+
+            // let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
+            // let earth = new SyEarth.Earth('earthContainer', {});
+
+            // const TILE_URL = '/apps/sampledata/3dtiles/nanjibaimo/tileset.json';
+            // const tileset = await Cesium.Cesium3DTileset.fromUrl(TILE_URL);
+            // earth.scene.primitives.add(tileset);
+            // // earth.zoomTo(tileset, new Cesium.HeadingPitchRange(0, -0.5, 0));
+
+            // earth.camera.setView({
+            //     destination: {
+            //         x: -2331562.136705761,
+            //         y: 5385865.379161526,
+            //         z: 2490228.9584838403
+            //     },
+            //     orientation: {
+            //         heading: 5.53974644037058,
+            //         pitch: -0.2630545551969017,
+            //         roll: 0
+            //     }
+            // });
+            // window.earth = earth;
+
+            // function removeData() {
+            //     earth.scene.primitives.remove(tileset);
+            // }
+
+            // //
+            // const gui = new lil.GUI({ autoPlace: true });
+            // gui.domElement.id = 'GuiRight';
+            // const panel = gui.addFolder('数据展示');
+            // panel.open();
+            // const operationObj = {
+            //     show: true,
+            //     removeData
+            // };
+            // panel
+            //     .add(operationObj, 'show')
+            //     .name('是否显示')
+            //     .onChange(function (val) {
+            //         tileset && (tileset.show = val);
+            //     });
+            // panel.add(operationObj, 'removeData').name('移除');
+
+            // // window.test = function () {
+            // //     let a = SyEarth.EarthManage.toJSON(earth);
+            // //     console.log(a);
+            // // };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,124 @@
+<!--
+ * @Author: Varian LIn
+ * @Date: 2024-08-28 13:57:47
+ * @LastEditors: Varian LIn
+ * @LastEditTime: 2025-09-25 11:23:41
+-->
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="/dist/syearth.min.js"></script>
+        <script src="/dist/thirdparty/lil-gui@0.21.js"></script>
+        <title>smooth spline</title>
+    </head>
+    <body>
+        <style>
+            @import url(/apps/style/global.css);
+        </style>
+        <div id="earthContainer"></div>
+        <script type="module">
+            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
+            let earth = new SyEarth.Earth('earthContainer', options);
+            earth.scene.setTerrain(Cesium.Terrain.fromWorldTerrain());
+            window.earth = earth;
+
+            //
+            // const tileset = await Cesium.Cesium3DTileset.fromUrl(
+            //     'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json'
+            // );
+            // earth.scene.primitives.add(tileset);
+            // earth.zoomTo(tileset);
+            earth.camera.setView({
+                destination: new Cesium.Cartesian3(-1716763.9443120894, 4997874.17669862, 3564633.1423460897),
+                orientation: {
+                    heading: 6.283185307179565,
+                    pitch: -0.500066909076399,
+                    roll: 0
+                }
+            });
+
+            //
+            let smoothLine;
+            let al = [
+                { x: 108.93222712721621, y: 34.2169664740244, z: 1000 },
+                { x: 108.93143775367997, y: 34.24384309755944, z: 1000 },
+                { x: 109.01959866233486, y: 34.214767171358794, z: 1000 }
+            ];
+            let positions = al.map((p) => {
+                let list = new Cesium.Cartesian3.fromDegrees(p.x, p.y, p.z);
+                return list;
+            });
+            let polyline = earth.entities.add({
+                polyline: {
+                    positions: positions,
+                    width: 4,
+                    material: Cesium.Color.RED
+                }
+            });
+
+            function createType1() {
+                smoothLine && earth.entities.remove(smoothLine);
+                let points = SyEarth.SmoothSplineHandler(earth, {
+                    positions: positions,
+                    type: 1,
+                    smoothDegree: 1000
+                });
+                smoothLine = earth.entities.add({
+                    polyline: {
+                        positions: points,
+                        width: 4,
+                        material: Cesium.Color.YELLOW
+                    }
+                });
+            }
+            function createType2() {
+                smoothLine && earth.entities.remove(smoothLine);
+                let points = SyEarth.SmoothSplineHandler(earth, {
+                    positions: positions,
+                    type: 2,
+                    smoothDegree: 1000
+                });
+                smoothLine = earth.entities.add({
+                    polyline: {
+                        positions: points,
+                        width: 4,
+                        material: Cesium.Color.YELLOW
+                    }
+                });
+            }
+            function createType3() {
+                smoothLine && earth.entities.remove(smoothLine);
+                let points = SyEarth.SmoothSplineHandler(earth, {
+                    positions: positions,
+                    type: 3,
+                    smoothDegree: 1000
+                });
+                smoothLine = earth.entities.add({
+                    polyline: {
+                        positions: points,
+                        width: 4,
+                        material: Cesium.Color.YELLOW
+                    }
+                });
+            }
+
+            //
+            const gui = new lil.GUI({ autoPlace: true });
+            gui.domElement.id = 'GuiRight';
+            const panel = gui.addFolder('Main');
+            panel.open();
+            const operationObj = {
+                createType1,
+                createType2,
+                createType3
+            };
+            // panel.add(operationObj, 'zoomToMountain').name('定位到山区');
+            // panel.add(operationObj, 'createCurve').name('定位到3dtiles');
+            panel.add(operationObj, 'createType1').name('样条线-方式1');
+            panel.add(operationObj, 'createType2').name('样条线-方式2');
+            panel.add(operationObj, 'createType3').name('样条线-方式3');
+        </script>
+    </body>
+</html>

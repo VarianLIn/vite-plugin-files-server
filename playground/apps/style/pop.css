@@ -1,0 +1,213 @@
+.mapPop1:after,
+.mapPop1:before {
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		/* left: 100.5%; */
+		left: 0%;
+		position: absolute;
+		width: 0;
+}
+.mapPop1:after {
+		border-width: 9px;
+		/* border-left-color: rgba(42, 42, 42, 0.8); */
+		border-right-color: rgba(42, 42, 42, 0.8);
+		top: 2px;
+		left: -18px;
+}
+.mapPop1:before {
+		border-width: 11px;
+		/* border-left-color: #b8d24c; */
+		border-right-color: #b8d24c;
+		top: 0px;
+		left: -22px;
+}
+.mapPop2:after,
+.mapPop2:before {
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		left: 100.5%;
+		position: absolute;
+		width: 0;
+}
+.mapPop2:after {
+		border-width: 9px;
+		border-left-color: rgba(42, 42, 42, 0.8);
+		top: 2px;
+}
+.mapPop2:before {
+		border-width: 11px;
+		border-left-color: #b8d24c;
+		top: 0px;
+}
+.mapPop3:after,
+.mapPop3:before {
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		left: 0%;
+		position: absolute;
+		width: 0;
+}
+.mapPop3:after {
+		border-width: 9px;
+		border-right-color: rgba(42, 42, 42, 0.8);
+		top: 40px;
+		left: -18px;
+}
+.mapPop3:before {
+		border-width: 11px;
+		border-right-color: #b8d24c;
+		top: 38px;
+		left: -22px;
+}
+.mapPop4:after,
+.mapPop4:before {
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		left: 100.5%;
+		position: absolute;
+		width: 0;
+}
+.mapPop4:after {
+		border-width: 9px;
+		border-left-color: rgba(42, 42, 42, 0.8);
+		top: 40px;
+}
+.mapPop4:before {
+		border-width: 11px;
+		border-left-color: #b8d24c;
+		top: 38px;
+}
+.mapPop1 {
+		top: 20px;
+		left: 100px;
+}
+.mapPop2 {
+		top: 20px;
+		left: 500px;
+}
+.mapPop3 {
+		top: 320px;
+		left: 100px;
+}
+.mapPop4 {
+		top: 300px;
+		left: 500px;
+}
+.comPop {
+		width: 100px;
+		padding: 5px;
+		/* height: 70px; */
+		background: rgba(42, 42, 42, 0.8);
+		top: 20px;
+		left: 100px;
+		border-radius: 4px;
+		border: 1px solid #b8d24c;
+		position: absolute;
+		color: rgba(255, 255, 255, 1);
+		z-index: 100;
+		background-size: 100%;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+}
+.comPop .mapPopName {
+		font-size: 18px;
+		text-indent: 10px;
+}
+.comPop .detailC,
+.comPop .detailD {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 22px;
+		line-height: 22px;
+		font-size: 13px;
+		font-family: KaiTi;
+		font-weight: bolder;
+		text-align: center;
+		color: rgba(255, 255, 255, 1);
+}
+.mapPop1 .detailD div:last-child,
+.mapPop1 .detailC div:last-child {
+		font-size: 15px;
+		font-family: KaiTi;
+		text-align: center;
+		color: rgba(244, 244, 179, 1);
+}
+.comPop:after,
+.comPop:before {
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		/* left: 100.5%; */
+		left: 0%;
+		position: absolute;
+		width: 0;
+}
+.comPop:after {
+		border-width: 9px;
+		/* border-left-color: rgba(42, 42, 42, 0.8); */
+		border-right-color: rgba(42, 42, 42, 0.8);
+		top: 2px;
+		left: -18px;
+}
+.comPop:before {
+		border-width: 11px;
+		/* border-left-color: #b8d24c; */
+		border-right-color: #b8d24c;
+		top: 0px;
+		left: -22px;
+}
+.mapPop1,
+.mapPop2,
+.mapPop3,
+.mapPop4 {
+		width: 100px;
+		height: 60px;
+		background: rgba(42, 42, 42, 0.8);
+		border-radius: 4px;
+		border: 1px solid #b8d24c;
+		position: absolute;
+		color: rgba(255, 255, 255, 1);
+		z-index: 100;
+		background-size: 100%;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+}
+.mapPop1 .detailC,
+.mapPop2 .detailC,
+.mapPop3 .detailC,
+.mapPop4 .detailC,
+.mapPop1 .detailD,
+.mapPop2 .detailD,
+.mapPop3 .detailD,
+.mapPop4 .detailD {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 30px;
+		line-height: 30px;
+		font-size: 13px;
+		font-family: KaiTi;
+		font-weight: bolder;
+		text-align: center;
+		color: rgba(255, 255, 255, 1);
+}
+.mapPop1 .detailD div:last-child,
+.mapPop2 .detailD div:last-child,
+.mapPop3 .detailD div:last-child,
+.mapPop4 .detailD div:last-child,
+.mapPop1 .detailC div:last-child,
+.mapPop2 .detailC div:last-child,
+.mapPop3 .detailC div:last-child,
+.mapPop4 .detailC div:last-child {
+		font-size: 15px;
+		font-family: KaiTi;
+		text-align: center;
+		color: rgba(244, 244, 179, 1);
+}
