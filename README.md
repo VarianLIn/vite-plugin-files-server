@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2026-03-11 16:43:38
  * @LastEditors: Varian LIn
- * @LastEditTime: 2026-03-11 17:39:11
+ * @LastEditTime: 2026-03-11 17:41:52
  * @Description:
 -->
 
@@ -17,3 +17,10 @@
 ## NPM
 
 https://www.npmjs.com/package/vite-plugin-files-server
+
+
+##
+
+https://registry.npmmirror.com
+
+npm config set registry https://registry.npmjs.org
