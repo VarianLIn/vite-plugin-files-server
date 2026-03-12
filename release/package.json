@@ -1,6 +1,6 @@
 {
     "name": "vite-plugin-files-server",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "",
     "type": "module",
     "main": "./plugin/index.js",
@@ -11,7 +11,7 @@
     ],
     "scripts": {
         "dev": "tsup --watch",
-        "build": "tsup",
+        "build": "tsup && node build.mjs",
         "test:playground": "cd playground && npm run dev"
     },
     "packageManager": "npm@10.9.2",

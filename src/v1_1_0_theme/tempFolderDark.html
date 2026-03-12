@@ -9,7 +9,8 @@
             body {
                 background-color: #1a1a1a; /* 修改：亮色 #f8f9fa → 暗色 #1a1a1a */
                 color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
                 margin: 0;
                 padding: 20px;
                 font-size: 14px;
@@ -52,7 +53,7 @@
                 line-height: 1.6;
                 color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
             }
-            
+
             /* 文件夹项 - 暗色主题 */
             .folder-item {
                 cursor: default;
@@ -78,7 +79,7 @@
                 content: '📁';
                 margin-right: 8px;
             }
-            
+
             /* 文件网格布局 - 三列 */
             .file-grid {
                 margin: 12px 0 20px 0;
@@ -136,6 +137,51 @@
                 left: 0;
                 top: 0;
                 color: #a0a0a0; /* 修改：亮色 #6c757d → 暗色 #a0a0a0 */
+            }
+
+            .back-all-link {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            }
+            .back-all-link a {
+                text-decoration: none;
+                padding: 10px 16px;
+                display: block;
+                border-radius: 8px;
+                transition: all 0.2s;
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #dee2e6 → 暗色 #3a3a3a */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 修改：阴影加深 */
+            }
+            .back-all-link a:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 修改：阴影加深 */
+            }
+            .back-all-link a.back-link {
+                color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #cfe2ff → 暗色 #3a3a3a */
+                padding-left: 48px;
+                position: relative;
+                color: #a0a0a0; /* 修改：亮色 #6c757d → 暗色 #a0a0a0 */
+                background-color: #2a2a2a; /* 修改：亮色 #f8f9fa → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #e9ecef → 暗色 #3a3a3a */
+            }
+            .back-all-link a.back-link:hover {
+                background-color: #3a3a3a; /* 修改：亮色 #f8f9fa → 暗色 #3a3a3a */
+                border-color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+                background-color: #3a3a3a; /* 修改：亮色 #e9ecef → 暗色 #3a3a3a */
+                border-color: #4dabf7; /* 修改：亮色 #dee2e6 → 暗色 #4dabf7 */
+            }
+            .back-all-link a.back-link::before {
+                content: '📁';
+                position: absolute;
+                left: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 16px;
+                content: '←';
+                margin-right: 8px;
             }
 
             /* 文件列表视图 - 暗色主题 */

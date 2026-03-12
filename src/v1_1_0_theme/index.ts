@@ -2,9 +2,10 @@
  * @Author: Varian LIn
  * @Date: 2026-03-12 11:13:54
  * @LastEditors: Varian LIn
- * @LastEditTime: 2026-03-12 15:07:30
+ * @LastEditTime: 2026-03-12 16:05:41
  * @Description: 26031204
- * v1.0.5 主题
+ * v1.1.0 主题
+ * v1.1.1 主题
  */
 
 import type { Plugin, ViteDevServer } from 'vite';
@@ -238,7 +239,9 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
 
                         if (isGalleryTree) {
                             // gallery 目录：显示树形结构的HTML文件
-                            content = buildGalleryTree(fullPath, url === '/' ? '' : url);
+                            content = `<p class="back-all-link"><a href="/apps" class="back-link">..</a></p>`;
+
+                            content += buildGalleryTree(fullPath, url === '/' ? '' : url);
                         } else {
                             // 其他目录：显示文件列表
                             content = generateFileList(fullPath, url);

@@ -1,8 +1,8 @@
-// src/v1_0_5_theme/index.ts
+// src/v1_1_0_theme/index.ts
 import fs from "fs";
 import path from "path";
 
-// src/v1_0_5_theme/tempFolderDark.html?raw
+// src/v1_1_0_theme/tempFolderDark.html?raw
 var tempFolderDark_default = `<!doctype html>\r
 <html lang="en">\r
     <head>\r
@@ -14,7 +14,8 @@ var tempFolderDark_default = `<!doctype html>\r
             body {\r
                 background-color: #1a1a1a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #f8f9fa \u2192 \u6697\u8272 #1a1a1a */\r
                 color: #e0e0e0; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #212529 \u2192 \u6697\u8272 #e0e0e0 */\r
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;\r
+                font-family:\r
+                    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;\r
                 margin: 0;\r
                 padding: 20px;\r
                 font-size: 14px;\r
@@ -57,7 +58,7 @@ var tempFolderDark_default = `<!doctype html>\r
                 line-height: 1.6;\r
                 color: #e0e0e0; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #212529 \u2192 \u6697\u8272 #e0e0e0 */\r
             }\r
-            \r
+\r
             /* \u6587\u4EF6\u5939\u9879 - \u6697\u8272\u4E3B\u9898 */\r
             .folder-item {\r
                 cursor: default;\r
@@ -83,7 +84,7 @@ var tempFolderDark_default = `<!doctype html>\r
                 content: '\u{1F4C1}';\r
                 margin-right: 8px;\r
             }\r
-            \r
+\r
             /* \u6587\u4EF6\u7F51\u683C\u5E03\u5C40 - \u4E09\u5217 */\r
             .file-grid {\r
                 margin: 12px 0 20px 0;\r
@@ -141,6 +142,51 @@ var tempFolderDark_default = `<!doctype html>\r
                 left: 0;\r
                 top: 0;\r
                 color: #a0a0a0; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #6c757d \u2192 \u6697\u8272 #a0a0a0 */\r
+            }\r
+\r
+            .back-all-link {\r
+                font-family:\r
+                    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;\r
+            }\r
+            .back-all-link a {\r
+                text-decoration: none;\r
+                padding: 10px 16px;\r
+                display: block;\r
+                border-radius: 8px;\r
+                transition: all 0.2s;\r
+                background-color: #2a2a2a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #ffffff \u2192 \u6697\u8272 #2a2a2a */\r
+                border: 1px solid #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #dee2e6 \u2192 \u6697\u8272 #3a3a3a */\r
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* \u4FEE\u6539\uFF1A\u9634\u5F71\u52A0\u6DF1 */\r
+            }\r
+            .back-all-link a:hover {\r
+                transform: translateY(-2px);\r
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* \u4FEE\u6539\uFF1A\u9634\u5F71\u52A0\u6DF1 */\r
+            }\r
+            .back-all-link a.back-link {\r
+                color: #4dabf7; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #0d6efd \u2192 \u6697\u8272 #4dabf7 */\r
+                background-color: #2a2a2a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #ffffff \u2192 \u6697\u8272 #2a2a2a */\r
+                border: 1px solid #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #cfe2ff \u2192 \u6697\u8272 #3a3a3a */\r
+                padding-left: 48px;\r
+                position: relative;\r
+                color: #a0a0a0; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #6c757d \u2192 \u6697\u8272 #a0a0a0 */\r
+                background-color: #2a2a2a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #f8f9fa \u2192 \u6697\u8272 #2a2a2a */\r
+                border: 1px solid #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #e9ecef \u2192 \u6697\u8272 #3a3a3a */\r
+            }\r
+            .back-all-link a.back-link:hover {\r
+                background-color: #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #f8f9fa \u2192 \u6697\u8272 #3a3a3a */\r
+                border-color: #4dabf7; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #0d6efd \u2192 \u6697\u8272 #4dabf7 */\r
+                background-color: #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #e9ecef \u2192 \u6697\u8272 #3a3a3a */\r
+                border-color: #4dabf7; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #dee2e6 \u2192 \u6697\u8272 #4dabf7 */\r
+            }\r
+            .back-all-link a.back-link::before {\r
+                content: '\u{1F4C1}';\r
+                position: absolute;\r
+                left: 16px;\r
+                top: 50%;\r
+                transform: translateY(-50%);\r
+                font-size: 16px;\r
+                content: '\u2190';\r
+                margin-right: 8px;\r
             }\r
 \r
             /* \u6587\u4EF6\u5217\u8868\u89C6\u56FE - \u6697\u8272\u4E3B\u9898 */\r
@@ -249,9 +295,10 @@ var tempFolderDark_default = `<!doctype html>\r
         <div class="breadcrumb">{{breadcrumb}}</div>\r
         <div class="content-area">{{list}}</div>\r
     </body>\r
-</html>`;
+</html>\r
+`;
 
-// src/v1_0_5_theme/tempFolderLight.html?raw
+// src/v1_1_0_theme/tempFolderLight.html?raw
 var tempFolderLight_default = `<!doctype html>\r
 <html lang="en">\r
     <head>\r
@@ -263,7 +310,8 @@ var tempFolderLight_default = `<!doctype html>\r
             body {\r
                 background-color: #f8f9fa;\r
                 color: #212529;\r
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;\r
+                font-family:\r
+                    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;\r
                 margin: 0;\r
                 padding: 20px;\r
                 font-size: 14px;\r
@@ -306,7 +354,7 @@ var tempFolderLight_default = `<!doctype html>\r
                 line-height: 1.6;\r
                 color: #212529;\r
             }\r
-            \r
+\r
             /* \u6587\u4EF6\u5939\u9879 - \u4EAE\u8272\u4E3B\u9898 */\r
             .folder-item {\r
                 cursor: default;\r
@@ -332,7 +380,7 @@ var tempFolderLight_default = `<!doctype html>\r
                 content: '\u{1F4C1}';\r
                 margin-right: 8px;\r
             }\r
-            \r
+\r
             /* \u6587\u4EF6\u7F51\u683C\u5E03\u5C40 - \u4E09\u5217 */\r
             .file-grid {\r
                 margin: 12px 0 20px 0;\r
@@ -390,6 +438,51 @@ var tempFolderLight_default = `<!doctype html>\r
                 left: 0;\r
                 top: 0;\r
                 color: #6c757d;\r
+            }\r
+\r
+            .back-all-link {\r
+                font-family:\r
+                    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;\r
+            }\r
+            .back-all-link a {\r
+                text-decoration: none;\r
+                padding: 10px 16px;\r
+                display: block;\r
+                border-radius: 8px;\r
+                transition: all 0.2s;\r
+                background-color: #ffffff;\r
+                border: 1px solid #dee2e6;\r
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\r
+            }\r
+            .back-all-link a:hover {\r
+                transform: translateY(-2px);\r
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);\r
+            }\r
+            .back-all-link a.back-link {\r
+                color: #0d6efd;\r
+                background-color: #ffffff;\r
+                border: 1px solid #cfe2ff;\r
+                padding-left: 48px;\r
+                position: relative;\r
+                color: #6c757d;\r
+                background-color: #f8f9fa;\r
+                border: 1px solid #e9ecef;\r
+            }\r
+            .back-all-link a.back-link:hover {\r
+                background-color: #e9ecef;\r
+                border-color: #dee2e6;\r
+                background-color: #f8f9fa;\r
+                border-color: #0d6efd;\r
+            }\r
+            .back-all-link a.back-link::before {\r
+                content: '\u{1F4C1}';\r
+                position: absolute;\r
+                left: 16px;\r
+                top: 50%;\r
+                transform: translateY(-50%);\r
+                font-size: 16px;\r
+                content: '\u2190';\r
+                margin-right: 8px;\r
             }\r
 \r
             /* \u6587\u4EF6\u5217\u8868\u89C6\u56FE - \u4EAE\u8272\u4E3B\u9898 */\r
@@ -498,9 +591,10 @@ var tempFolderLight_default = `<!doctype html>\r
         <div class="breadcrumb">{{breadcrumb}}</div>\r
         <div class="content-area">{{list}}</div>\r
     </body>\r
-</html>`;
+</html>\r
+`;
 
-// src/v1_0_5_theme/index.ts
+// src/v1_1_0_theme/index.ts
 function fileServerPlugin(options = {}) {
   const { enable = true, root = "", theme = "dark" } = options;
   return {
@@ -655,7 +749,8 @@ function fileServerPlugin(options = {}) {
             let content = "";
             const isGalleryTree = url === "/apps/gallery" || url.startsWith("/gallery/");
             if (isGalleryTree) {
-              content = buildGalleryTree(fullPath, url === "/" ? "" : url);
+              content = `<p class="back-all-link"><a href="/apps" class="back-link">..</a></p>`;
+              content += buildGalleryTree(fullPath, url === "/" ? "" : url);
             } else {
               content = generateFileList(fullPath, url);
             }
