@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2024-08-28 13:57:47
  * @LastEditors: Varian LIn
- * @LastEditTime: 2025-06-13 15:20:03
+ * @LastEditTime: 2026-03-12 15:11:32
 -->
 <!doctype html>
 <html lang="zh-cn">
@@ -36,65 +36,7 @@
         <div id="earthContainer"></div>
         <div id="tools"></div>
         <script type="module">
-            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
-            let earth = new SyEarth.Earth('earthContainer', options);
-
-            const tileset = await Cesium.Cesium3DTileset.fromUrl(
-                'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json'
-            );
-            earth.scene.primitives.add(tileset);
-            earth.zoomTo(tileset);
-            window.earth = earth;
-
-            let setViewMethod = earth.camera.flyTo;
-            //
-            const gui = new lil.GUI({ autoPlace: true });
-            gui.domElement.id = 'GuiRight';
-            const panel = gui.addFolder('panel');
-            panel.open();
-            const operationObj = {
-                zoomTo: function () {
-                    earth.zoomTo(tileset);
-                },
-                addView: function () {
-                    // 视角参数保存在 earth.cameraView 中
-                    let index = earth.addCameraView();
-
-                    var newElement = document.createElement('div');
-                    newElement.classList = ['tool'];
-                    newElement.innerHTML = `视角${index}`;
-                    newElement.index = index;
-                    newElement.onclick = function () {
-                        if (operationObj.type === '原生方法') {
-                            // earth.cameraView[this.index] 获取视角参数
-                            earth.camera.flyTo({ ...earth.cameraView[this.index], duration: 2 });
-                        }
-                        if (operationObj.type === 'setCameraView') {
-                            // earth.cameraView 对应索引
-                            earth.setCameraView(this.index);
-                        }
-                        if (operationObj.type === 'flyToCameraView') {
-                            // 第一个参数：earth.cameraView 对应索引，第二个参数 飞行时间
-                            earth.flyToCameraView(this.index, 2);
-                        }
-                    };
-                    document.getElementById('tools').appendChild(newElement);
-                },
-                type: 'flyToCameraView'
-                // setView: function () {
-                //     // TODO
-                //     // earth.cameraView && earth.cameraView.length > 0 && earth.camera.setView(earth.cameraView[0]);
-                //     earth.cameraView && earth.cameraView.length > 0 && earth.setCameraView(0);
-                // }
-            };
-
-            //
-            panel.add(operationObj, 'zoomTo').name('定位到位置');
-            panel.add(operationObj, 'addView').name('添加视角标签');
-            let ctrl = panel
-                .add(operationObj, 'type', ['原生方法', 'setCameraView', 'flyToCameraView'])
-                .name('飞行方法');
-            // pathPanel.add(operationObj, 'setView').name('Set View');
+           
         </script>
     </body>
 </html>

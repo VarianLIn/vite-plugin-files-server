@@ -21,73 +21,7 @@
 
         <div id="earthContainer"></div>
         <script type="module">
-            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
-            let earth = new SyEarth.Earth('earthContainer', options);
-
-            const tileset = await Cesium.Cesium3DTileset.fromUrl(
-                'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json'
-            );
-            earth.scene.primitives.add(tileset);
-            earth.zoomTo(tileset);
-
-            let position = new Cesium.Cartesian3(-1715480.977948048, 4993590.773564967, 3566942.6295070606);
-            function clear() {
-                earth.entities.removeAll();
-                earth.cancelRotatePoint();
-                earth.cancelCameraRotate();
-            }
-
-            // GUI
-            const gui = new lil.GUI({ autoPlace: true });
-            gui.domElement.id = 'GuiRight';
-            const panel = gui.addFolder('panel');
-            panel.open();
-            const operationObj = {
-                zoomTo: function () {
-                    earth.zoomTo(tileset);
-                },
-                rotatePoint: function () {
-                    clear();
-                    earth.entities.add({
-                        position: position,
-                        point: {
-                            pixelSize: 8,
-                            color: Cesium.Color.YELLOW
-                        }
-                    });
-                    earth.rotatePoint(position);
-                },
-                set: function () {
-                    clear();
-                    earth.setRotateDistance(2000);
-                    earth.entities.add({
-                        position: position,
-                        point: {
-                            pixelSize: 8,
-                            color: Cesium.Color.YELLOW
-                        }
-                    });
-                    earth.rotatePoint(position);
-                },
-                cancelRotatePoint: function () {
-                    earth.cancelRotatePoint();
-                },
-                cameraRotate: function () {
-                    clear();
-                    earth.cameraRotate();
-                },
-                cancelCameraRotate: function () {
-                    earth.cancelCameraRotate();
-                }
-            };
-
-            //
-            panel.add(operationObj, 'zoomTo').name('定位到位置');
-            panel.add(operationObj, 'rotatePoint').name('绕点旋转');
-            panel.add(operationObj, 'set').name('设置绕点旋转距离为2000');
-            panel.add(operationObj, 'cancelRotatePoint').name('取消绕点旋转');
-            panel.add(operationObj, 'cameraRotate').name('相机自转');
-            panel.add(operationObj, 'cancelCameraRotate').name('取消相机自转');
+          
         </script>
     </body>
 </html>

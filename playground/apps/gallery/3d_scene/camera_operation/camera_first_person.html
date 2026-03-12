@@ -33,37 +33,7 @@
             <p>鼠标控制视角方向</p>
         </div>
         <script type="module">
-            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
-            let earth = new SyEarth.Earth('earthContainer', options);
-
-            const tileset = await Cesium.Cesium3DTileset.fromUrl(
-                'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json'
-            );
-            earth.scene.primitives.add(tileset);
-            earth.zoomTo(tileset);
-
-            let f = new SyEarth.Utils.firstPerson(earth);
-
-            // GUI
-            const gui = new lil.GUI({ autoPlace: true });
-            gui.domElement.id = 'GuiRight';
-            const panel = gui.addFolder('panel');
-            panel.open();
-            const operationObj = {
-                zoomTo: function () {
-                    earth.zoomTo(tileset);
-                },
-                firstPerson: function () {
-                    f.start();
-                },
-                cancel: function () {
-                    f.quit();
-                }
-            };
-
-            panel.add(operationObj, 'zoomTo').name('定位到位置');
-            panel.add(operationObj, 'firstPerson').name('进入第一人称操作');
-            panel.add(operationObj, 'cancel').name('取消第一人称操作');
+           
         </script>
     </body>
 </html>

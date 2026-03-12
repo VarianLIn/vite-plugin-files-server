@@ -20,60 +20,7 @@
 
         <div id="earthContainer"></div>
         <script type="module">
-            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
-            let earth = new SyEarth.Earth('earthContainer', options);
-            earth.scene.globe.depthTestAgainstTerrain = true;
-            window.earth = earth;
-
-            const tileset = await Cesium.Cesium3DTileset.fromUrl(
-                'http://earthsdk.com/v/last/Apps/assets/dayanta/tileset.json'
-            );
-            earth.scene.primitives.add(tileset);
-            earth.zoomTo(tileset);
-
-            let arr = [];
-
-            const gui = new lil.GUI({ autoPlace: true });
-            gui.domElement.id = 'GuiRight';
-            const sightFolder = gui.addFolder('可视域分析');
-            sightFolder.open();
-            let sightSelectActions = {
-                addViewshed: function () {
-                    let viewshedHandler = new SyEarth.ViewshedHandler(earth);
-                    arr.push(viewshedHandler);
-                },
-                addViewshedByPt: function () {
-                    window.viewshedHandler = new SyEarth.ViewshedHandler(earth, {
-                        viewPosition: new Cesium.Cartesian3(-1715487.0453673897, 4993557.877507833, 3566767.967452448),
-                        viewPositionEnd: new Cesium.Cartesian3(
-                            -1715463.5533523194,
-                            4993574.947653379,
-                            3566744.1589856087
-                        )
-                    });
-                    arr.push(window.viewshedHandler);
-                },
-                remove: function () {
-                    window.viewshedHandler && (window.viewshedHandler = window.viewshedHandler.remove());
-                    arr &&
-                        arr.length > 0 &&
-                        arr.forEach((item) => {
-                            item = item.remove();
-                        });
-                    arr.length = 0;
-                },
-                show: true
-            };
-
-            sightFolder.add(sightSelectActions, 'addViewshed').name('拾取后展示可视域');
-            sightFolder.add(sightSelectActions, 'addViewshedByPt').name('根据固定点获取可视域');
-            sightFolder.add(sightSelectActions, 'remove').name('移除');
-            sightFolder
-                .add(sightSelectActions, 'show')
-                .name('显影')
-                .onChange((value) => {
-                    window.viewshedHandler && (window.viewshedHandler.show = value);
-                });
+        
         </script>
     </body>
 </html>

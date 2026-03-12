@@ -1,13 +1,13 @@
 {
     "name": "vite-plugin-files-server",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "description": "",
     "type": "module",
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
+    "main": "./plugin/index.js",
+    "module": "./plugin/index.mjs",
+    "types": "./plugin/index.d.ts",
     "files": [
-        "dist"
+        "plugin"
     ],
     "scripts": {
         "dev": "tsup --watch",

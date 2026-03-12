@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Demo List {{pageTitle}}</title>
+        <style>
+            /* 暗色主题 - 只修改颜色，保持与亮色主题相同的布局和尺寸 */
+            body {
+                background-color: #1a1a1a; /* 修改：亮色 #f8f9fa → 暗色 #1a1a1a */
+                color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            /* 面包屑导航 - 暗色 */
+            .breadcrumb {
+                color: #a0a0a0; /* 修改：亮色 #6c757d → 暗色 #a0a0a0 */
+                margin-bottom: 20px;
+                font-size: 13px;
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                padding: 12px 16px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 修改：阴影加深 */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #e9ecef → 暗色 #3a3a3a */
+            }
+            .breadcrumb-link {
+                color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.2s;
+                padding: 4px 8px;
+                border-radius: 4px;
+            }
+            .breadcrumb-link:hover {
+                background-color: #3a3a3a; /* 修改：亮色 #e7f1ff → 暗色 #3a3a3a */
+                color: #74c0fc; /* 修改：亮色 #0a58ca → 暗色 #74c0fc */
+                text-decoration: none;
+            }
+
+            /* 内容区域 */
+            .content-area {
+                margin-top: 20px;
+            }
+
+            /* gallery树形视图 - 暗色 */
+            .gallery-tree {
+                font-family: 'SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', monospace;
+                line-height: 1.6;
+                color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
+            }
+            
+            /* 文件夹项 - 暗色主题 */
+            .folder-item {
+                cursor: default;
+                margin: 6px 0;
+                padding-left: 20px;
+                position: relative;
+            }
+            /* .folder-item:hover {
+                background-color: #2a2a2a;  
+            } */
+            .folder-name {
+                color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+                text-decoration: none;
+                display: inline-block;
+                padding: 6px 12px;
+                border-radius: 6px;
+                font-weight: 500;
+                background-color: #2a2a2a; /* 修改：亮色 #e7f1ff → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #cfe2ff → 暗色 #3a3a3a */
+                transition: all 0.2s;
+            }
+            .folder-name::before {
+                content: '📁';
+                margin-right: 8px;
+            }
+            
+            /* 文件网格布局 - 三列 */
+            .file-grid {
+                margin: 12px 0 20px 0;
+                display: block;
+            }
+            .file-row {
+                display: flex;
+                margin: 8px 0;
+            }
+            .file-column {
+                flex: 1;
+                min-width: 0;
+                margin: 0 6px;
+                padding: 8px 12px;
+                border-radius: 8px;
+                transition: all 0.2s;
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #dee2e6 → 暗色 #3a3a3a */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 修改：阴影加深 */
+            }
+            .file-column:hover {
+                background-color: #3a3a3a; /* 修改：亮色 #f8f9fa → 暗色 #3a3a3a */
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 修改：阴影加深 */
+                border-color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+            }
+            .empty-column {
+                background-color: transparent;
+                border: 1px solid transparent;
+                box-shadow: none;
+            }
+            .empty-column:hover {
+                background-color: transparent;
+                transform: none;
+                box-shadow: none;
+                border-color: transparent;
+            }
+            .html-file-link {
+                color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
+                text-decoration: none;
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-left: 24px;
+                position: relative;
+                font-size: 13px;
+            }
+            .html-file-link:hover {
+                color: #ffffff; /* 修改：亮色 #0d6efd → 暗色 #ffffff */
+            }
+            .html-file-link::before {
+                content: '📄';
+                position: absolute;
+                left: 0;
+                top: 0;
+                color: #a0a0a0; /* 修改：亮色 #6c757d → 暗色 #a0a0a0 */
+            }
+
+            /* 文件列表视图 - 暗色主题 */
+            .file-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .file-list li {
+                margin: 6px 0;
+            }
+            .file-list a {
+                text-decoration: none;
+                padding: 10px 16px;
+                display: block;
+                border-radius: 8px;
+                transition: all 0.2s;
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #dee2e6 → 暗色 #3a3a3a */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 修改：阴影加深 */
+            }
+            .file-list a:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 修改：阴影加深 */
+            }
+            .file-list a.folder-link {
+                color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #cfe2ff → 暗色 #3a3a3a */
+                padding-left: 48px;
+                position: relative;
+            }
+            .file-list a.folder-link:hover {
+                background-color: #3a3a3a; /* 修改：亮色 #f8f9fa → 暗色 #3a3a3a */
+                border-color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+            }
+            .file-list a.folder-link::before {
+                content: '📁';
+                position: absolute;
+                left: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 16px;
+            }
+            .file-list a.back-link {
+                color: #a0a0a0; /* 修改：亮色 #6c757d → 暗色 #a0a0a0 */
+                background-color: #2a2a2a; /* 修改：亮色 #f8f9fa → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #e9ecef → 暗色 #3a3a3a */
+            }
+            .file-list a.back-link:hover {
+                background-color: #3a3a3a; /* 修改：亮色 #e9ecef → 暗色 #3a3a3a */
+                border-color: #4dabf7; /* 修改：亮色 #dee2e6 → 暗色 #4dabf7 */
+            }
+            .file-list a.back-link::before {
+                content: '←';
+                margin-right: 8px;
+            }
+            .file-list a.file-link {
+                color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                border: 1px solid #3a3a3a; /* 修改：亮色 #dee2e6 → 暗色 #3a3a3a */
+                padding-left: 48px;
+                position: relative;
+            }
+            .file-list a.file-link:hover {
+                background-color: #3a3a3a; /* 修改：亮色 #f8f9fa → 暗色 #3a3a3a */
+                border-color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+            }
+            .file-list a.file-link::before {
+                content: '📄';
+                position: absolute;
+                left: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 16px;
+                color: #a0a0a0; /* 修改：亮色 #6c757d → 暗色 #a0a0a0 */
+            }
+
+            /* 空状态 - 暗色 */
+            .empty-message {
+                color: #a0a0a0; /* 修改：亮色 #6c757d → 暗色 #a0a0a0 */
+                font-style: italic;
+                text-align: center;
+                padding: 32px;
+                background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
+                border-radius: 8px;
+                border: 1px dashed #3a3a3a; /* 修改：亮色 #dee2e6 → 暗色 #3a3a3a */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 修改：阴影加深 */
+            }
+
+            /* 响应式设计 */
+            @media (max-width: 768px) {
+                body {
+                    padding: 12px;
+                }
+                .file-row {
+                    flex-direction: column;
+                }
+                .file-column {
+                    margin: 4px 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="breadcrumb">{{breadcrumb}}</div>
+        <div class="content-area">{{list}}</div>
+    </body>
+</html>

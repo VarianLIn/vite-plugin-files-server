@@ -20,15 +20,7 @@
 
         <div id="earthContainer"></div>
         <script type="module">
-            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
-            let earth = new SyEarth.Earth('earthContainer', options);
-
-            // const TILE_URL = '/apps/sampledata/PointCloud/PointCloudBatched/tileset.json';
-            const TILE_URL = '/apps/sampledata/PointCloud/rabbit/tileset.json';
-
-            const tileset = await Cesium.Cesium3DTileset.fromUrl(TILE_URL);
-            earth.scene.primitives.add(tileset);
-            earth.zoomTo(tileset, new Cesium.HeadingPitchRange(0, -0.5, 0));
+          
         </script>
     </body>
 </html>

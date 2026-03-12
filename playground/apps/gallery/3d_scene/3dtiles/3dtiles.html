@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2024-08-28 13:57:47
  * @LastEditors: Varian LIn
- * @LastEditTime: 2026-03-11 17:11:55
+ * @LastEditTime: 2026-03-12 15:11:58
 -->
 <!doctype html>
 <html lang="zh-cn">
@@ -29,16 +29,6 @@
             // });
             // scene.primitives.add(layer);
 
-            // layer.readyPromise.then(function () {
-            //     scene.camera.setView({
-            //         destination: new Cesium.Cartesian3(-2181968.890329965, 4385313.17843029, 4072712.8241634783),
-            //         orientation: {
-            //             heading: 3.1756648661534443,
-            //             pitch: -0.3715184468182904
-            //         }
-            //     });
-            // });
-
             // let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
             // let earth = new SyEarth.Earth('earthContainer', {});
 
@@ -59,33 +49,7 @@
             //         roll: 0
             //     }
             // });
-            // window.earth = earth;
-
-            // function removeData() {
-            //     earth.scene.primitives.remove(tileset);
-            // }
-
-            // //
-            // const gui = new lil.GUI({ autoPlace: true });
-            // gui.domElement.id = 'GuiRight';
-            // const panel = gui.addFolder('数据展示');
-            // panel.open();
-            // const operationObj = {
-            //     show: true,
-            //     removeData
-            // };
-            // panel
-            //     .add(operationObj, 'show')
-            //     .name('是否显示')
-            //     .onChange(function (val) {
-            //         tileset && (tileset.show = val);
-            //     });
-            // panel.add(operationObj, 'removeData').name('移除');
-
-            // // window.test = function () {
-            // //     let a = SyEarth.EarthManage.toJSON(earth);
-            // //     console.log(a);
-            // // };
+            
         </script>
     </body>
 </html>
