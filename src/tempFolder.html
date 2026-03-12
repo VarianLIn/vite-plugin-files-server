@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Demo List {{pageTitle}}</title>
+        <style>
+            body {
+                background-color: #000000;
+                color: #ffffff;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                margin: 0;
+                padding: 20px;
+                font-size: 13px;
+            }
+
+            /* 面包屑导航 */
+            .breadcrumb {
+                color: #cccccc;
+                margin-bottom: 20px;
+                font-size: 12px;
+            }
+            .breadcrumb-link {
+                color: #569cd6;
+                text-decoration: none;
+                padding: 4px 8px;
+                border-radius: 4px;
+                transition: all 0.2s;
+            }
+            .breadcrumb-link:hover {
+                background-color: rgba(86, 156, 214, 0.2);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            /* 标题区域 */
+            .header {
+                margin-bottom: 20px;
+            }
+            h1 {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: normal;
+                margin: 0 0 5px 0;
+            }
+            .path-info {
+                color: #808080;
+                font-size: 12px;
+            }
+
+            /* 内容区域 */
+            .content-area {
+                margin-top: 20px;
+            }
+
+            /* gallery树形视图 */
+            .gallery-tree {
+                font-family: 'Consolas', 'Monaco', monospace;
+                line-height: 1.8;
+                color: #ffffff;
+            }
+            .gallery-tree .folder-item {
+                cursor: default;
+                margin: 4px 0;
+                /* padding: 4px 8px; */
+                border-radius: 4px;
+                /* transition: all 0.2s; */
+            }
+            /* .gallery-tree .folder-item:hover {
+                background-color: rgba(86, 156, 214, 0.2);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            } */
+            .gallery-tree .folder-name {
+                color: #569cd6;
+                padding-left: 20px;
+                position: relative;
+            }
+            .gallery-tree .folder-name::before {
+                content: '📁';
+                position: absolute;
+                left: 0px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .gallery-tree .file-item {
+                color: #569cd6;
+                background-color: rgba(86, 156, 214, 0.1);
+                border: 1px solid rgba(86, 156, 214, 0.3);
+                margin: 4px 0;
+                padding: 4px 18px;
+                border-radius: 4px;
+                transition: all 0.2s;
+            }
+            .gallery-tree .file-item:hover {
+                background-color: rgba(206, 145, 120, 0.2);
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+            .gallery-tree .html-file-link {
+                /* color: #ce9178; */
+                color: #ffffff;
+                text-decoration: none;
+                padding-left: 20px;
+                position: relative;
+                display: inline-block;
+            }
+            .gallery-tree .html-file-link::before {
+                content: '📄';
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            /* 文件列表视图 */
+            .file-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .file-list li {
+                margin: 4px 0;
+            }
+            .file-list a {
+                text-decoration: none;
+                padding: 6px 10px;
+                display: block;
+                border-radius: 4px;
+                transition: all 0.2s;
+            }
+            .file-list a:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            }
+            .file-list a.folder-link {
+                color: #569cd6;
+                background-color: rgba(86, 156, 214, 0.1);
+                border: 1px solid rgba(86, 156, 214, 0.3);
+                padding-left: 40px;
+                position: relative;
+            }
+            .file-list a.folder-link:hover {
+                background-color: rgba(86, 156, 214, 0.2);
+            }
+            .file-list a.folder-link::before {
+                content: '📁';
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .file-list a.back-link {
+                color: #808080;
+                background-color: rgba(128, 128, 128, 0.1);
+                border: 1px solid rgba(128, 128, 128, 0.3);
+            }
+            .file-list a.back-link:hover {
+                background-color: rgba(128, 128, 128, 0.2);
+            }
+            .file-list a.back-link::before {
+                content: '←';
+                margin-right: 8px;
+            }
+            .file-list a.file-link {
+                color: #ffffff;
+                background-color: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding-left: 40px;
+                position: relative;
+            }
+            .file-list a.file-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            .file-list a.file-link::before {
+                content: '📄';
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            /* 分隔线 */
+            .separator {
+                border-top: 1px solid #333333;
+                margin: 20px 0;
+            }
+
+            /* 空状态 */
+            .empty-message {
+                color: #808080;
+                font-style: italic;
+                text-align: center;
+                padding: 20px;
+                background-color: rgba(128, 128, 128, 0.1);
+                border-radius: 4px;
+                border: 1px solid rgba(128, 128, 128, 0.2);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="breadcrumb">{{breadcrumb}}</div>
+
+        <!-- <div class="header">
+            <h1>Index of ${pageTitle}</h1>
+            <div class="path-info">Path: ${pageTitle}</div>
+        </div> -->
+
+        <div class="separator"></div>
+
+        <div class="content-area">{{list}}</div>
+    </body>
+</html>

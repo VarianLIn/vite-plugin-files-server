@@ -4,6 +4,7 @@
  * @LastEditors: Varian LIn
  * @LastEditTime: 2025-12-29 21:52:28
  * @Description:
+ * v1.0.2
  */
 
 import type { Plugin, ViteDevServer } from 'vite';
