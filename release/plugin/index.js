@@ -762,13 +762,6 @@ function fileServerPlugin(options = {}) {
         if (url.startsWith("/@") || url.includes("vite")) {
           return next();
         }
-        if (url && url.startsWith("/dist/") && !url.startsWith("/@")) {
-          const oldUrl = url;
-          const newUrl = url.replace(/^\/dist\//, "/version/dist/");
-          req.url = newUrl;
-          console.log(`[Dist-Rewrite] \u{1F680} Mapping: ${oldUrl} -> ${newUrl}`);
-          return next();
-        }
         const projectRoot = server.config.root;
         const fullPath = path.join(projectRoot, url);
         try {

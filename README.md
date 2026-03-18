@@ -1,10 +1,3 @@
-<!--
- * @Author: Varian LIn
- * @Date: 2026-03-11 16:43:38
- * @LastEditors: Varian LIn
- * @LastEditTime: 2026-03-18 15:16:22
- * @Description:
--->
 
 # vite-plugin-files-server
 
