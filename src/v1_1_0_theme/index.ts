@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2026-03-12 11:13:54
  * @LastEditors: Varian LIn
- * @LastEditTime: 2026-03-12 16:05:41
+ * @LastEditTime: 2026-03-18 15:15:38
  * @Description: 26031204
  * v1.1.0 主题
  * v1.1.1 主题
@@ -90,9 +90,16 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
 
                     // 输出文件夹
                     folderItems.forEach(({ file, filePath, relativePath }) => {
-                        html += `<div class="folder-item">
+                        let level = relativePath.split('/');
+                        if (level.length == 4) {
+                            html += `<div class="folder-item">
                             <a class="folder-name">${file}</a>
                         </div>`;
+                        } else if (level.length == 5) {
+                            html += `<div class="folder-item">
+                            <a class="folder-name level-sub">${file}</a>
+                        </div>`;
+                        }
                         // 递归处理子目录
                         const subTree = buildGalleryTree(filePath, relativePath, depth + 1);
                         if (subTree) {
@@ -223,6 +230,15 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                 if (url.startsWith('/@') || url.includes('vite')) {
                     return next();
                 }
+
+                // if (url && url.startsWith('/dist/') && !url.startsWith('/@')) {
+                //     const oldUrl = url;
+                //     const newUrl = url.replace(/^\/dist\//, '/version/dist/'); // 仅替换开头的 /dist/
+                //     req.url = newUrl;
+                //     // 打印日志，确认是否误伤了其他文件
+                //     console.log(`[Dist-Rewrite] 🚀 Mapping: ${oldUrl} -> ${newUrl}`);
+                //     return next();
+                // }
 
                 const projectRoot = server.config.root;
                 const fullPath = path.join(projectRoot, url);

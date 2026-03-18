@@ -76,11 +76,19 @@ var tempFolderDark_default = `<!doctype html>\r
                 padding: 6px 12px;\r
                 border-radius: 6px;\r
                 font-weight: 500;\r
-                background-color: #2a2a2a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #e7f1ff \u2192 \u6697\u8272 #2a2a2a */\r
+                background-color: #525252; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #e7f1ff \u2192 \u6697\u8272 #2a2a2a */\r
                 border: 1px solid #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #cfe2ff \u2192 \u6697\u8272 #3a3a3a */\r
                 transition: all 0.2s;\r
             }\r
             .folder-name::before {\r
+                content: '\u{1F5C2}\uFE0F';\r
+                margin-right: 8px;\r
+            }\r
+            .level-sub {\r
+                background-color: #2a2a2a;\r
+                padding: 1px 12px;\r
+            }\r
+            .level-sub::before {\r
                 content: '\u{1F4C1}';\r
                 margin-right: 8px;\r
             }\r
@@ -372,11 +380,19 @@ var tempFolderLight_default = `<!doctype html>\r
                 padding: 6px 12px;\r
                 border-radius: 6px;\r
                 font-weight: 500;\r
-                background-color: #e7f1ff;\r
+                background-color: #a8ccff;\r
                 border: 1px solid #cfe2ff;\r
                 transition: all 0.2s;\r
             }\r
             .folder-name::before {\r
+                content: '\u{1F5C2}\uFE0F';\r
+                margin-right: 8px;\r
+            }\r
+            .level-sub {\r
+                background-color: #e7f1ff;\r
+                padding: 1px 12px;\r
+            }\r
+            .level-sub::before {\r
                 content: '\u{1F4C1}';\r
                 margin-right: 8px;\r
             }\r
@@ -642,9 +658,16 @@ function fileServerPlugin(options = {}) {
             }
           });
           folderItems.forEach(({ file, filePath, relativePath }) => {
-            html += `<div class="folder-item">
+            let level = relativePath.split("/");
+            if (level.length == 4) {
+              html += `<div class="folder-item">
                             <a class="folder-name">${file}</a>
                         </div>`;
+            } else if (level.length == 5) {
+              html += `<div class="folder-item">
+                            <a class="folder-name level-sub">${file}</a>
+                        </div>`;
+            }
             const subTree = buildGalleryTree(filePath, relativePath, depth + 1);
             if (subTree) {
               html += subTree;
@@ -737,6 +760,13 @@ function fileServerPlugin(options = {}) {
       server.middlewares.use((req, res, next) => {
         const url = req.url ? decodeURIComponent(req.url.split("?")[0]) : "/";
         if (url.startsWith("/@") || url.includes("vite")) {
+          return next();
+        }
+        if (url && url.startsWith("/dist/") && !url.startsWith("/@")) {
+          const oldUrl = url;
+          const newUrl = url.replace(/^\/dist\//, "/version/dist/");
+          req.url = newUrl;
+          console.log(`[Dist-Rewrite] \u{1F680} Mapping: ${oldUrl} -> ${newUrl}`);
           return next();
         }
         const projectRoot = server.config.root;

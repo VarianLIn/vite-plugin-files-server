@@ -71,11 +71,19 @@
                 padding: 6px 12px;
                 border-radius: 6px;
                 font-weight: 500;
-                background-color: #e7f1ff;
+                background-color: #a8ccff;
                 border: 1px solid #cfe2ff;
                 transition: all 0.2s;
             }
             .folder-name::before {
+                content: '🗂️';
+                margin-right: 8px;
+            }
+            .level-sub {
+                background-color: #e7f1ff;
+                padding: 1px 12px;
+            }
+            .level-sub::before {
                 content: '📁';
                 margin-right: 8px;
             }

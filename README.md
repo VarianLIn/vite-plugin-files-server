@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2026-03-11 16:43:38
  * @LastEditors: Varian LIn
- * @LastEditTime: 2026-03-12 14:52:39
+ * @LastEditTime: 2026-03-18 15:16:22
  * @Description:
 -->
 
@@ -26,4 +26,5 @@ npm config set registry https://registry.npmjs.org
 
 ## version
 
+- <2026年3月18日> v1.1.2 更新文件服务器样式, 高亮父层级
 - v1.0.3 稳定版本, 同步webpack文件服务器样式

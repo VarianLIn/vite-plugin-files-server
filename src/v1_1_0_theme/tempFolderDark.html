@@ -71,11 +71,19 @@
                 padding: 6px 12px;
                 border-radius: 6px;
                 font-weight: 500;
-                background-color: #2a2a2a; /* 修改：亮色 #e7f1ff → 暗色 #2a2a2a */
+                background-color: #525252; /* 修改：亮色 #e7f1ff → 暗色 #2a2a2a */
                 border: 1px solid #3a3a3a; /* 修改：亮色 #cfe2ff → 暗色 #3a3a3a */
                 transition: all 0.2s;
             }
             .folder-name::before {
+                content: '🗂️';
+                margin-right: 8px;
+            }
+            .level-sub {
+                background-color: #2a2a2a;
+                padding: 1px 12px;
+            }
+            .level-sub::before {
                 content: '📁';
                 margin-right: 8px;
             }
