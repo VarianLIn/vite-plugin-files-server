@@ -121,6 +121,8 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                                 html += `<div class="file-column">
                                     <a href="${relativePath}" class="html-file-link">${file}</a>
                                 </div>`;
+                                // <a href="${relativePath}" class="html-file-link">${file}</a>
+                                // <a href="${relativePath}" class="html-file-link" target="_blank">${file}</a>
                             });
 
                             // 如果一行不足3个，添加空列占位

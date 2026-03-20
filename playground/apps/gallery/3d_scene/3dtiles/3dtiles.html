@@ -2,7 +2,7 @@
  * @Author: Varian LIn
  * @Date: 2024-08-28 13:57:47
  * @LastEditors: Varian LIn
- * @LastEditTime: 2026-03-12 15:11:58
+ * @LastEditTime: 2026-03-20 16:55:30
 -->
 <!doctype html>
 <html lang="zh-cn">
@@ -19,9 +19,9 @@
 
         <div id="earthContainer"></div>
         <script type="module">
-            let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
+            let options = await SyEarth.Utils.loadJSON('apps/sampledata/config/baseConfig.json');
 
-            // let earth = new SyEarth.Earth('earthContainer', {});
+            let earth = new SyEarth.Earth('earthContainer', {});
             // let scene = earth.scene;
             // let layer = new SyEarth.S3MTilesLayer({
             //     context: scene._context,
@@ -32,10 +32,10 @@
             // let options = await SyEarth.Utils.loadJSON('/apps/sampledata/config/baseConfig.json');
             // let earth = new SyEarth.Earth('earthContainer', {});
 
-            // const TILE_URL = '/apps/sampledata/3dtiles/nanjibaimo/tileset.json';
-            // const tileset = await Cesium.Cesium3DTileset.fromUrl(TILE_URL);
-            // earth.scene.primitives.add(tileset);
-            // // earth.zoomTo(tileset, new Cesium.HeadingPitchRange(0, -0.5, 0));
+            const TILE_URL = 'apps/sampledata/3dtiles/nanjibaimo/tileset.json';
+            const tileset = await Cesium.Cesium3DTileset.fromUrl(TILE_URL);
+            earth.scene.primitives.add(tileset);
+            earth.zoomTo(tileset, new Cesium.HeadingPitchRange(0, -0.5, 0));
 
             // earth.camera.setView({
             //     destination: {

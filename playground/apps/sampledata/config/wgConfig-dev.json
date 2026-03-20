@@ -1,0 +1,122 @@
+{
+    "scene": {
+        "resolutionScale": 1,
+        "msaaSamples": 8,
+        "shadows": false,
+        "shadowMap": true,
+        "scene3DOnly": false,
+        "showSkyBox": true,
+        "skyBoxType": "night",
+        "showSkyAtmosphere": false,
+        "globe": {
+            "depthTestAgainstTerrain": false,
+            "enableLighting": true
+        },
+        "fxaaEnabled": true,
+        "bloomEnabled": true,
+        "highDynamicRange": true,
+        "tonemapper": "PBR_NEUTRAL",
+        "exposure": 0.68
+    },
+    "terrain": false,
+    "baseLayer": false,
+    "layers": [
+        {
+            "name": "高德",
+            "url": "https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}",
+            "type": "gd",
+            "minimumLevel": 3,
+            "maximumLevel": 18,
+            "brightness": 0.38,
+            "contrast": 0.88,
+            "hue": 6.2832,
+            "saturation": 0.01,
+            "gamma": 0.06,
+            "show": true
+        },
+        {
+            "name": "武汉",
+            "url": "http://10.11.11.42:8873/wuhan_3dtile/wuhan_3dtile/tileset.json",
+            "type": "3dtiles",
+            "styleType": "wg",
+            "backFaceCulling": true,
+            "flyto": true,
+            "offset": {
+                "heading": 0,
+                "pitch": -35
+            },
+            "show": true
+        },
+        {
+            "name": "water_geojson",
+            "url": "apps/sampledata/geojson/wuhan_water_demo.geojson",
+            "type": "geojson",
+            "material": {
+                "type": "water",
+                "baseWaterColor": "#14494dcc",
+                "blendColor": "#ffffff",
+                "specularMap": null,
+                "normalMap": "assets/textures/Water_1_M_Normal.jpg",
+                "frequency": 15,
+                "animationSpeed": 0.009,
+                "amplitude": 20,
+                "specularIntensity": 10,
+                "fadeFactor": 5
+            },
+            "styles": {
+                "outline": false
+            },
+            "show": true
+        },
+        {
+            "name": "road_0308",
+            "url": "apps/sampledata/geojson/0308.geojson",
+            "type": "geojson",
+            "material": {
+                "type": "flowline",
+                "color": "#4da79a",
+                "image": "assets/textures/LinkPulse.png",
+                "duration": 10000
+            },
+            "styles": {},
+            "show": true
+        },
+        {
+            "name": "road_1015",
+            "url": "apps/sampledata/geojson/1015.geojson",
+            "type": "geojson",
+            "material": {
+                "type": "flowline",
+                "color": "#fff",
+                "image": "assets/textures/line.png",
+                "duration": 4000
+            },
+            "styles": {},
+            "show": true
+        },
+        {
+            "name": "road_1624",
+            "url": "apps/sampledata/geojson/1624.geojson",
+            "type": "geojson",
+            "material": {
+                "type": "flowline",
+                "color": "#FFA365",
+                "image": "assets/textures/line.png",
+                "duration": 500
+            },
+            "styles": {},
+            "show": true
+        }
+    ],
+    "token": null,
+    "bloom": {
+        "uniforms": {
+            "glowOnly": false,
+            "contrast": 128,
+            "brightness": -0.3,
+            "delta": 1.1,
+            "sigma": 0.78,
+            "stepSize": 1.0
+        }
+    }
+}

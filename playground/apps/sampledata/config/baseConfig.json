@@ -1,0 +1,18 @@
+{
+    "baseLayer": {
+        "name": "ArcGIS影像",
+        "url": "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        "type": "xyz",
+        "maximumLevel": 16,
+        "show": true
+    },
+    "layers": [
+        {
+            "name": "ArcGIS影像",
+            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+            "type": "arcgis",
+            "maximumLevel": 16,
+            "show": false
+        }
+    ]
+}
