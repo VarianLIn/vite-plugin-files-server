@@ -62,7 +62,7 @@
                 position: relative;
             }
             /* .folder-item:hover {
-                background-color: #2a2a2a;  
+                background-color: #2a2a2a;
             } */
             .folder-name {
                 color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
@@ -107,12 +107,15 @@
                 background-color: #2a2a2a; /* 修改：亮色 #ffffff → 暗色 #2a2a2a */
                 border: 1px solid #3a3a3a; /* 修改：亮色 #dee2e6 → 暗色 #3a3a3a */
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 修改：阴影加深 */
+                color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
+                text-decoration: none;
             }
             .file-column:hover {
                 background-color: #3a3a3a; /* 修改：亮色 #f8f9fa → 暗色 #3a3a3a */
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 修改：阴影加深 */
                 border-color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #4dabf7 */
+                color: #4dabf7; /* 修改：亮色 #0d6efd → 暗色 #ffffff */
             }
             .empty-column {
                 background-color: transparent;
@@ -126,8 +129,8 @@
                 border-color: transparent;
             }
             .html-file-link {
-                color: #e0e0e0; /* 修改：亮色 #212529 → 暗色 #e0e0e0 */
-                text-decoration: none;
+                /* color: #e0e0e0;
+                text-decoration: none; */
                 display: block;
                 white-space: nowrap;
                 overflow: hidden;
@@ -136,9 +139,9 @@
                 position: relative;
                 font-size: 13px;
             }
-            .html-file-link:hover {
-                color: #ffffff; /* 修改：亮色 #0d6efd → 暗色 #ffffff */
-            }
+            /* .html-file-link:hover {
+                color: #ffffff; 
+            } */
             .html-file-link::before {
                 content: '📄';
                 position: absolute;

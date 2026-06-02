@@ -101,7 +101,7 @@ var tempFolderDark_default = `<!doctype html>\r
                 position: relative;\r
             }\r
             /* .folder-item:hover {\r
-                background-color: #2a2a2a;  \r
+                background-color: #2a2a2a;\r
             } */\r
             .folder-name {\r
                 color: #4dabf7; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #0d6efd \u2192 \u6697\u8272 #4dabf7 */\r
@@ -146,12 +146,15 @@ var tempFolderDark_default = `<!doctype html>\r
                 background-color: #2a2a2a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #ffffff \u2192 \u6697\u8272 #2a2a2a */\r
                 border: 1px solid #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #dee2e6 \u2192 \u6697\u8272 #3a3a3a */\r
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* \u4FEE\u6539\uFF1A\u9634\u5F71\u52A0\u6DF1 */\r
+                color: #e0e0e0; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #212529 \u2192 \u6697\u8272 #e0e0e0 */\r
+                text-decoration: none;\r
             }\r
             .file-column:hover {\r
                 background-color: #3a3a3a; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #f8f9fa \u2192 \u6697\u8272 #3a3a3a */\r
                 transform: translateY(-2px);\r
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* \u4FEE\u6539\uFF1A\u9634\u5F71\u52A0\u6DF1 */\r
                 border-color: #4dabf7; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #0d6efd \u2192 \u6697\u8272 #4dabf7 */\r
+                color: #4dabf7; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #0d6efd \u2192 \u6697\u8272 #ffffff */\r
             }\r
             .empty-column {\r
                 background-color: transparent;\r
@@ -165,8 +168,8 @@ var tempFolderDark_default = `<!doctype html>\r
                 border-color: transparent;\r
             }\r
             .html-file-link {\r
-                color: #e0e0e0; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #212529 \u2192 \u6697\u8272 #e0e0e0 */\r
-                text-decoration: none;\r
+                /* color: #e0e0e0;\r
+                text-decoration: none; */\r
                 display: block;\r
                 white-space: nowrap;\r
                 overflow: hidden;\r
@@ -175,9 +178,9 @@ var tempFolderDark_default = `<!doctype html>\r
                 position: relative;\r
                 font-size: 13px;\r
             }\r
-            .html-file-link:hover {\r
-                color: #ffffff; /* \u4FEE\u6539\uFF1A\u4EAE\u8272 #0d6efd \u2192 \u6697\u8272 #ffffff */\r
-            }\r
+            /* .html-file-link:hover {\r
+                color: #ffffff; \r
+            } */\r
             .html-file-link::before {\r
                 content: '\u{1F4C4}';\r
                 position: absolute;\r
@@ -450,12 +453,15 @@ var tempFolderLight_default = `<!doctype html>\r
                 background-color: #ffffff;\r
                 border: 1px solid #dee2e6;\r
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);\r
+                color: #212529;\r
+                text-decoration: none;\r
             }\r
             .file-column:hover {\r
                 background-color: #f8f9fa;\r
                 transform: translateY(-2px);\r
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);\r
                 border-color: #0d6efd;\r
+                color: #0d6efd;\r
             }\r
             .empty-column {\r
                 background-color: transparent;\r
@@ -469,8 +475,8 @@ var tempFolderLight_default = `<!doctype html>\r
                 border-color: transparent;\r
             }\r
             .html-file-link {\r
-                color: #212529;\r
-                text-decoration: none;\r
+                /* color: #212529;\r
+                text-decoration: none; */\r
                 display: block;\r
                 white-space: nowrap;\r
                 overflow: hidden;\r
@@ -479,9 +485,9 @@ var tempFolderLight_default = `<!doctype html>\r
                 position: relative;\r
                 font-size: 13px;\r
             }\r
-            .html-file-link:hover {\r
+            /* .html-file-link:hover {\r
                 color: #0d6efd;\r
-            }\r
+            } */\r
             .html-file-link::before {\r
                 content: '\u{1F4C4}';\r
                 position: absolute;\r
@@ -713,9 +719,9 @@ function fileServerPlugin(options = {}) {
               const rowFiles = htmlFiles.slice(i, i + 3);
               html += `<div class="file-row">`;
               rowFiles.forEach(({ file, relativePath }) => {
-                html += `<div class="file-column">
-                                    <a href="${relativePath}" class="html-file-link">${file}</a>
-                                </div>`;
+                html += `<a class="file-column" href="${relativePath}">
+                                    <div class="html-file-link">${file}</div>
+                                </a>`;
               });
               for (let j = rowFiles.length; j < 3; j++) {
                 html += `<div class="file-column empty-column"></div>`;

@@ -118,9 +118,12 @@ export default function fileServerPlugin(options: FilesServerOptions = {}): Plug
                             html += `<div class="file-row">`;
 
                             rowFiles.forEach(({ file, relativePath }) => {
-                                html += `<div class="file-column">
-                                    <a href="${relativePath}" class="html-file-link">${file}</a>
-                                </div>`;
+                                // html += `<div class="file-column">
+                                //     <a href="${relativePath}" class="html-file-link">${file}</a>
+                                // </div>`;
+                                html += `<a class="file-column" href="${relativePath}">
+                                    <div class="html-file-link">${file}</div>
+                                </a>`;
                                 // <a href="${relativePath}" class="html-file-link">${file}</a>
                                 // <a href="${relativePath}" class="html-file-link" target="_blank">${file}</a>
                             });
