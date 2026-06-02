@@ -27,12 +27,12 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/v1_1_0_theme/index.ts
-var v1_1_0_theme_exports = {};
-__export(v1_1_0_theme_exports, {
+// src/v1_1_0_theme/index_static.ts
+var index_static_exports = {};
+__export(index_static_exports, {
   default: () => fileServerPlugin
 });
-module.exports = __toCommonJS(v1_1_0_theme_exports);
+module.exports = __toCommonJS(index_static_exports);
 var import_fs = __toESM(require("fs"), 1);
 var import_path = __toESM(require("path"), 1);
 
@@ -650,7 +650,7 @@ var tempFolderLight_default = `<!doctype html>\r
 </html>\r
 `;
 
-// src/v1_1_0_theme/index.ts
+// src/v1_1_0_theme/index_static.ts
 function fileServerPlugin(options = {}) {
   const { enable = true, root = "", theme = "dark" } = options;
   return {
@@ -668,7 +668,7 @@ function fileServerPlugin(options = {}) {
         console.error("Failed to load template:", e);
         templateString = tempFolderDark_default;
       }
-      function buildGalleryTree(dirPath, baseUrl = "", depth = 0) {
+      function buildGalleryTree(dirPath, baseUrl = "", depth = 0, fileCounter = { count: 0 }) {
         try {
           const files = import_fs.default.readdirSync(dirPath);
           let html = "";
@@ -692,6 +692,7 @@ function fileServerPlugin(options = {}) {
                 folderItems.push({ file, filePath, relativePath });
               } else if (import_path.default.extname(file).toLowerCase() === ".html" || import_path.default.extname(file).toLowerCase() === ".htm") {
                 htmlFiles.push({ file, relativePath });
+                fileCounter.count++;
               }
             } catch (e) {
               console.error(`Error reading ${filePath}:`, e);
@@ -708,7 +709,7 @@ function fileServerPlugin(options = {}) {
                             <a class="folder-name level-sub">${file}</a>
                         </div>`;
             }
-            const subTree = buildGalleryTree(filePath, relativePath, depth + 1);
+            const subTree = buildGalleryTree(filePath, relativePath, depth + 1, fileCounter);
             if (subTree) {
               html += subTree;
             }
@@ -740,6 +741,7 @@ function fileServerPlugin(options = {}) {
         try {
           const files = import_fs.default.readdirSync(fullPath);
           let listItems = "";
+          let fileCount = 0;
           const sortedFiles = files.sort((a, b) => {
             const aPath = import_path.default.join(fullPath, a);
             const bPath = import_path.default.join(fullPath, b);
@@ -765,15 +767,16 @@ function fileServerPlugin(options = {}) {
             } else {
               listItems += `<li><a href="${href}" class="file-link">${file}</a></li>
 `;
+              fileCount++;
             }
           });
-          return listItems;
+          return { listItems, fileCount };
         } catch (e) {
           console.error(`Error generating file list:`, e);
-          return "";
+          return { listItems: "", fileCount: 0 };
         }
       }
-      function generateHtmlPage(url, content, isGalleryTree = false) {
+      function generateHtmlPage(url, content, isGalleryTree = false, totalFiles = 0) {
         let urlSplitArray = url.split("/").filter(Boolean);
         let breadcrumb = "";
         if (url === "/") {
@@ -789,12 +792,15 @@ function fileServerPlugin(options = {}) {
           });
         }
         const pageTitle = url === "/" ? "/" : url;
-        const list = isGalleryTree ? `<div class="gallery-tree">${content || '<div class="empty-message">No HTML files found</div>'}</div>` : `
+        const countBadgeHtml = `<div class="file-count-badge" style="margin-bottom: 15px; font-size: 14px; color: #666;">
+                    <strong>\u5171\u6709 ${totalFiles} \u4E2A\u6587\u4EF6</strong>
+                </div>`;
+        const list = isGalleryTree ? `${countBadgeHtml}<div class="gallery-tree">${content || '<div class="empty-message">No HTML files found</div>'}</div>` : `${countBadgeHtml}
             <ul class="file-list">
                 ${content || '<li class="empty-message">No files found</li>'}
             </ul>
             `;
-        const html = templateString.replace(/{{pageTitle}}/g, pageTitle).replace(/{{breadcrumb}}/g, breadcrumb).replace(/{{list}}/g, list);
+        const html = templateString.replace(/{{pageTitle}}/g, pageTitle).replace(/{{breadcrumb}}/g, breadcrumb).replace(/{{list}}/g, list).replace(/{{fileCount}}/g, totalFiles.toString());
         return html;
       }
       server.middlewares.use((req, res, next) => {
@@ -810,14 +816,19 @@ function fileServerPlugin(options = {}) {
               return next();
             }
             let content = "";
+            let totalFiles = 0;
             const isGalleryTree = url === "/apps/gallery" || url.startsWith("/gallery/");
             if (isGalleryTree) {
               content = `<p class="back-all-link"><a href="/apps" class="back-link">..</a></p>`;
-              content += buildGalleryTree(fullPath, url === "/" ? "" : url);
+              const counter = { count: 0 };
+              content += buildGalleryTree(fullPath, url === "/" ? "" : url, 0, counter);
+              totalFiles = counter.count;
             } else {
-              content = generateFileList(fullPath, url);
+              const result = generateFileList(fullPath, url);
+              content = result.listItems;
+              totalFiles = result.fileCount;
             }
-            const html = generateHtmlPage(url, content, isGalleryTree);
+            const html = generateHtmlPage(url, content, isGalleryTree, totalFiles);
             res.setHeader("Content-Type", "text/html");
             res.end(html);
             return;

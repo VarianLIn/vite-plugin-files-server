@@ -13,7 +13,8 @@ export default defineConfig({
         // index: 'src/index_26031201.ts'
         // index: 'src/index_26031202.ts'
         // index: 'src/index_26031203.ts'
-        index: 'src/v1_1_0_theme/index.ts'
+        // index: 'src/v1_1_0_theme/index.ts'
+        index: 'src/v1_1_0_theme/index_static.ts'
     },
     format: ['cjs', 'esm'], // 同时输出 CommonJS 和 ES Module
     dts: true, // 生成 .d.ts 类型文件
